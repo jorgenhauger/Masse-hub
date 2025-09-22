@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skanska Masse-Hub - Bærekraftig Ressursdeling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --skanska-blue: #004d9f;
+            --nordic-green: #2d5a3d;
+            --warm-grey: #f5f5f5;
+            --dark-grey: #333;
+            --accent-orange: #ff6b35;
+            --light-blue: #e8f4fd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--skanska-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-grey);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--skanska-blue);
+        }
+
+        .cta-button {
+            background: var(--accent-orange);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23004d9f" opacity="0.1"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--skanska-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--nordic-green);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(45deg, var(--nordic-green), var(--skanska-blue));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-visual::before {
+            content: '🏗️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--skanska-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nordic-green), var(--skanska-blue));
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: var(--skanska-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background: var(--warm-grey);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--accent-orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--skanska-blue);
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+            border-radius: 15px;
+            border-left: 4px solid var(--nordic-green);
+        }
+
+        .benefit-item h4 {
+            color: var(--skanska-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--skanska-blue) 0%, var(--nordic-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: var(--accent-orange);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--skanska-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-grey);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Skanska Masse-Hub</a>
+                <ul class="nav-links">
+                    <li><a href="#features">Hvordan det virker</a></li>
+                    <li><a href="#process">Prosess</a></li>
+                    <li><a href="#benefits">Fordeler</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+                <a href="#contact" class="cta-button">Kom i gang</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Fremtidens Bærekraftige Markedsplass for Overskuddsmasser</h1>
+                        <p>Skanska Masse-Hub gjør overskuddsmasser fra Hålogalandsveien til verdifulle ressurser. Vår innovative plattform kombinerer Soil Steam-teknologi med en digital markedsplass for optimal ressursutnyttelse.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Bærekraftig</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">75%</span>
+                                <span class="stat-label">Mindre Transport</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">50%</span>
+                                <span class="stat-label">Kostnadsbesparelse</span>
+                            </div>
+                        </div>
+
+                        <a href="#features" class="cta-button">Utforsk Plattformen</a>
+                    </div>
+                    <div class="hero-visual"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Innovativ Ressursforvaltning</h2>
+                    <p>Vår digitale plattform revolusjonerer hvordan overskuddsmasser håndteres og distribueres i Nord-Norge</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌱</div>
+                        <h3>Soil Steam-prosess</h3>
+                        <p>Avansert dampbehandling som eliminerer fremmede arter og øker massenes kvalitet og verdi betydelig.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Digital Markedsplass</h3>
+                        <p>Brukervennlig plattform hvor entreprenører, bønder og kommuner enkelt kan finne og bestille de massene de trenger.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Smart Kategorisering</h3>
+                        <p>Systematisk klassifisering etter størrelse og kvalitet for optimal matching mellom tilbud og etterspørsel.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚛</div>
+                        <h3>Lokal Distribusjon</h3>
+                        <p>Redusert transportbehov gjennom strategisk plassering og lokal tilgjengelighet av behandlede masser.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Økonomisk Vekst</h3>
+                        <p>Bidrar til regional utvikling ved å gjøre ressurser tilgjengelige for lokale byggeprosjekter og infrastruktur.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Klimavennlig</h3>
+                        <p>Betydelige CO₂-reduksjoner sammenlignet med tradisjonell transport av masser fra fjerntliggende områder.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Slik Fungerer Masse-Hub</h2>
+                    <p>En strømlinjeformet prosess fra innsamling til levering</p>
+                </div>
+
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4 class="step-title">Innsamling</h4>
+                        <p>Overskuddsmasser fra Hålogalandsveien samles inn på vår fysiske hub-lokasjon.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4 class="step-title">Kategorisering</h4>
+                        <p>Massene analyseres og kategoriseres systematisk etter størrelse, kvalitet og egenskaper.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4 class="step-title">Soil Steam-behandling</h4>
+                        <p>Avansert dampbehandling eliminerer fremmede arter og forbedrer kvaliteten.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4 class="step-title">Digital Listing</h4>
+                        <p>Behandlede masser listes på vår digitale markedsplass med detaljerte spesifikasjoner.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h4 class="step-title">Bestilling & Levering</h4>
+                        <p>Kunder bestiller via plattformen og får massene levert direkte til prosjektstedet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Hvorfor Velge Skanska Masse-Hub?</h2>
+                    <p>Omfattende fordeler for miljø, økonomi og samfunn</p>
+                </div>
+
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>🌍 Miljøvennlig Løsning</h4>
+                        <p>Drastisk reduksjon i CO₂-utslipp ved å eliminere lang transport av nye masser fra andre regioner.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h4>💡 Sirkulær Økonomi</h4>
+                        <p>Optimal utnyttelse av eksisterende ressurser som ellers ville gått til spille eller deponering.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h4>🏗️ Regional Utvikling</h4>
+                        <p>Støtter lokal byggeaktivitet og infrastrukturutvikling i Nord-Norge med tilgjengelige ressurser.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h4>🔬 Innovativ Teknologi</h4>
+                        <p>Pionerer innen Soil Steam-teknologi for behandling og oppgradering av jordmasser.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h4>📱 Digital Effektivitet</h4>
+                        <p>Moderne plattform som forenkler prosessen med å finne, bestille og levere masser.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h4>🛡️ Fremmedart-kontroll</h4>
+                        <p>Reduserer risikoen for spredning av invasive arter gjennom systematisk behandling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="final-cta">
+            <div class="container">
+                <h2>Bli Med På Fremtidens Ressursforvaltning</h2>
+                <p>Ta kontakt i dag for å lære mer om hvordan Skanska Masse-Hub kan bidra til ditt neste prosjekt og en mer bærekraftig byggebransje.</p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:kontakt@skanska-massehub.no" class="cta-primary">Kontakt Oss</a>
+                    <a href="#features" class="cta-secondary">Les Mer</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Skanska Masse-Hub. En bærekraftig fremtid bygges sammen.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'white';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.feature-card, .process-step, .benefit-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
